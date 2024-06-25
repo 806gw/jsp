@@ -78,16 +78,16 @@ footer {
 		<h1>의성 홍보 사이트</h1>
 	</header>
 	<div class="container">
-		<div class="link">
-			<a href="recommend.jsp" id="food">의성 추천 보러 가기</a> <a href="local.jsp"
-				id="local">로컬 푸드 사러 가기</a>
-		</div>
 		<div class="logo-box">
 			<img src="./img/logo.svg" class="logo" />
 		</div>
 		<h2 style="text-align: center;">2024년 의성 홍보 사이트입니다.</h2>
 		<h4 style="text-align: center;">This is a 2024 Uiseong
-			promotional site.</h4>
+			promotional site.</h4> </br>
+		<div class="link">
+			<a href="recommend.jsp" id="food">의성 추천 보러 가기</a> <a href="local.jsp"
+				id="local">로컬 푸드 사러 가기</a>
+		</div>
 	</div>
 	<footer>
 		<p>&copy; 2024 의성 홍보 사이트</p>

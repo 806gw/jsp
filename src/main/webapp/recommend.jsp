@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -94,6 +95,7 @@ header {
 .loc-name {
     width: 100%;
     font-size: 16px;
+    font-weight: 800;
     margin-left: 10px;
     color: #fff;
 }
@@ -125,76 +127,52 @@ footer {
         </div>
         <h2>의성 관광 명소</h2>
         <div class="pro-container">
+            <% 
+                String url = "jdbc:oracle:thin:@localhost:1521:xe";
+                String user = "system"; 
+                String password = "1234"; 
+
+                Connection conn = null;
+                Statement stmt = null;
+                ResultSet rs = null;
+
+                try {
+                    Class.forName("oracle.jdbc.driver.OracleDriver");
+                    conn = DriverManager.getConnection(url, user, password);
+                    stmt = conn.createStatement();
+                    String query = "SELECT * FROM attractions";
+                    rs = stmt.executeQuery(query);
+
+                    while(rs.next()) {
+                        String name = rs.getString("name");
+                        double rating = rs.getDouble("rating");
+                        String description = rs.getString("description");
+                        String imageUrl = rs.getString("image_url");
+            %>
             <div class="promotion">
                 <div>
                     <div class="location">
-                        <img src="./img/고운사.jpg" alt="">
+                        <img src="<%= imageUrl %>" alt="">
                     </div>
                     <div class="info">
-                        <p class="loc-name">고운사</p>
+                        <p class="loc-name"><%= name %></p>
                         <p class="loc-info">
-                            4.5 ⭐ (673) <br> 불교사찰
+                            <%= rating %> ⭐ <br> <%= description %>
                         </p>
                         <p class="loc-info">ㅤ</p>
                     </div>
                 </div>
             </div>
-            <div class="promotion">
-                <div>
-                    <div class="location">
-                        <img src="./img/산수유마을.jpeg" alt="">
-                    </div>
-                    <div class="info">
-                        <p class="loc-name">산수유마을</p>
-                        <p class="loc-info">
-                            3.8 ⭐ (338) <br> 관광 명소
-                        </p>
-                        <p class="loc-info">ㅤ</p>
-                    </div>
-                </div>
-            </div>
-            <div class="promotion">
-                <div>
-                    <div class="location">
-                        <img src="./img/조문국.jpeg" alt="">
-                    </div>
-                    <div class="info">
-                        <p class="loc-name">의성 조문국 박물관</p>
-                        <p class="loc-info">
-                            4.3 ⭐ (836) <br> 박물관
-                        </p>
-                        <p class="loc-info">ㅤ</p>
-                    </div>
-                </div>
-            </div>
-            <div class="promotion">
-                <div>
-                    <div class="location">
-                        <img src="./img/빙계계곡.jpg" alt="">
-                    </div>
-                    <div class="info">
-                        <p class="loc-name">빙계계곡</p>
-                        <p class="loc-info">
-                            4.3 ⭐ (404) <br> 관광 명소
-                        </p>
-                        <p class="loc-info">ㅤ</p>
-                    </div>
-                </div>
-            </div>
-            <div class="promotion">
-                <div>
-                    <div class="location">
-                        <img src="./img/의성마늘테마파크.jpg" alt="">
-                    </div>
-                    <div class="info">
-                        <p class="loc-name">의성마늘테마파크</p>
-                        <p class="loc-info">
-                            3.3 ⭐ (008) <br> 관광 명소
-                        </p>
-                        <p class="loc-info">ㅤ</p>
-                    </div>
-                </div>
-            </div>
+            <% 
+                    }
+                } catch(Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    if(rs != null) try { rs.close(); } catch(SQLException ex) {}
+                    if(stmt != null) try { stmt.close(); } catch(SQLException ex) {}
+                    if(conn != null) try { conn.close(); } catch(SQLException ex) {}
+                }
+            %>
         </div>
     </div>
     <footer>
