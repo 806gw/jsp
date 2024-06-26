@@ -81,8 +81,8 @@
                     <tr>
                         <td><%= name %></td>
                         <td><%= description %></td>
-                        <td><%= price %></td>
-                        <td><button class="buy-button" onclick="alert('로그인이 되어야 합니다')">구매하기</button></td>
+                        <td><%= price %>원</td>
+                        <td><button class="buy-button">구매하기</button></td>
                     </tr>
                     <%
                 }
