@@ -1,4 +1,4 @@
-```sql
+```
 - 로컬 푸드 판매 테이블                             - 의성 관광명소 테이블
 
 CREATE TABLE local_food (                          CREATE TABLE attractions (
